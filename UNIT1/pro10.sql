@@ -3,8 +3,6 @@
 
 SET SERVEROUTPUT ON;
 
--- Create EMP table
-
 CREATE TABLE EMP
 (
     EID NUMBER PRIMARY KEY,
@@ -14,16 +12,12 @@ CREATE TABLE EMP
     ADDRESS VARCHAR2(100)
 );
 
--- Insert sample records
-
 INSERT INTO EMP VALUES (101, 'Aasif', 'Male', 'IT', 'Rajkot');
 INSERT INTO EMP VALUES (102, 'Rahul', 'Male', 'HR', 'Ahmedabad');
 INSERT INTO EMP VALUES (103, 'Priya', 'Female', 'HR', 'Surat');
 INSERT INTO EMP VALUES (104, 'Amit', 'Male', 'HR', 'Rajkot');
 
 COMMIT;
-
--- PL/SQL Program
 
 DECLARE
     V_EID NUMBER;
