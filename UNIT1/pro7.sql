@@ -1,0 +1,67 @@
+-- Q7. Write a PL/SQL block to calculate Total, Percentage
+-- and Grade of a student using the RESULT table.
+
+SET SERVEROUTPUT ON;
+
+-- Create RESULT table
+
+CREATE TABLE RESULT
+(
+    ROLLNO NUMBER PRIMARY KEY,
+    NAME VARCHAR2(50),
+    M1 NUMBER,
+    M2 NUMBER,
+    M3 NUMBER
+);
+
+-- Insert sample records
+
+INSERT INTO RESULT VALUES (101, 'Aasif', 80, 75, 90);
+INSERT INTO RESULT VALUES (102, 'Rahul', 65, 70, 60);
+INSERT INTO RESULT VALUES (103, 'Amit', 92, 88, 95);
+
+COMMIT;
+
+-- PL/SQL Program
+
+DECLARE
+    V_ROLLNO RESULT.ROLLNO%TYPE;
+    V_NAME RESULT.NAME%TYPE;
+    V_M1 RESULT.M1%TYPE;
+    V_M2 RESULT.M2%TYPE;
+    V_M3 RESULT.M3%TYPE;
+    V_TOTAL NUMBER;
+    V_PERCENTAGE NUMBER;
+    V_GRADE VARCHAR2(10);
+BEGIN
+    V_ROLLNO := &ROLLNO;
+
+    SELECT ROLLNO, NAME, M1, M2, M3
+    INTO V_ROLLNO, V_NAME, V_M1, V_M2, V_M3
+    FROM RESULT
+    WHERE ROLLNO = V_ROLLNO;
+
+    V_TOTAL := V_M1 + V_M2 + V_M3;
+    V_PERCENTAGE := V_TOTAL / 3;
+
+    IF V_PERCENTAGE >= 90 THEN
+        V_GRADE := 'A+';
+    ELSIF V_PERCENTAGE >= 80 THEN
+        V_GRADE := 'A';
+    ELSIF V_PERCENTAGE >= 70 THEN
+        V_GRADE := 'B';
+    ELSIF V_PERCENTAGE >= 60 THEN
+        V_GRADE := 'C';
+    ELSIF V_PERCENTAGE >= 50 THEN
+        V_GRADE := 'D';
+    ELSE
+        V_GRADE := 'F';
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE('Roll No = ' || V_ROLLNO);
+    DBMS_OUTPUT.PUT_LINE('Name = ' || V_NAME);
+    DBMS_OUTPUT.PUT_LINE('Total = ' || V_TOTAL);
+    DBMS_OUTPUT.PUT_LINE('Percentage = ' || V_PERCENTAGE);
+    DBMS_OUTPUT.PUT_LINE('Grade = ' || V_GRADE);
+END;
+/
